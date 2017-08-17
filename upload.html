@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sdfsdf</title>
+	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<form id="file_form" enctype="multipart/form-data" method="post" action="http://localhost:8080/upload">
+
+			<input type="file" name="uploadfile"/>
+			<input type="submit" name="" value="tijiao">
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('.upbtn').click(function(){
+			$.ajax({
+                cache: true,
+                type: "POST",
+                url:"http://localhost:8080",
+                data:$('#file_form').serialize(),// 你的formid
+                async: false,
+                error: function(request) {
+                    alert("Connection error");
+                },
+                success: function(data) {
+                    alert('suc')
+                }
+            });
+		})
+	})
+</script>
+</html>
