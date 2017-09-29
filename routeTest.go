@@ -14,13 +14,30 @@ func main() {
 	router := httprouter.New()
 	router.POST("/upload", Upload)
 	router.GET("/", Index)
+	router.GET("/abc", Templ)
 	router.GET("/hello/:name", Hello)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
+
 func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	renderHTML(w, "upload.html", "no data")
+}
+
+type Info struct{
+	Name string
+	Place string
+	Test string
+	Time string
+	Mygod string
+}
+
+
+func Templ(w http.ResponseWriter, r *http.Request, ps httprouter.Params){
+	info:=Info{"skdfjsdklfksd","skdfjksdfj","sdlkfjskdfj","sdklfjsldkjf","slkdfjslkdjfdks"}
+    tmpl, _ := template.ParseFiles("home.html")
+    tmpl.Execute(w, info)
 }
 
 func Upload(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
